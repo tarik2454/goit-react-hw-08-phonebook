@@ -8,7 +8,6 @@ export const selectError = state => state.contacts.error;
 export const selectVisibleContacts = createSelector(
   [selectContacts, selectFilter],
   (contacts, filter) => {
-    console.log('Calculating task count');
     return contacts.filter(({ name }) =>
       name.toLowerCase().includes(filter.toLowerCase().trim())
     );

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export const baseURL = axios.create({
   baseURL: 'https://64df632671c3335b2582897e.mockapi.io',
@@ -9,7 +9,6 @@ export const baseURL = axios.create({
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
-    // toast.info('You have active loading');
     try {
       const { data } = await baseURL.get('/contacts');
 
@@ -18,6 +17,16 @@ export const fetchContacts = createAsyncThunk(
       console.error(error);
       return thunkAPI.rejectWithValue(error.message);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      // console.log(getState());
+      const isLoading = getState().contacts.isLoading;
+      if (isLoading) {
+        toast.info('You have active loading');
+        return false;
+      }
+    },
   }
 );
 
@@ -42,15 +51,15 @@ export const deleteContact = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.message);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      // console.log(getState());
+      const isLoading = getState().contacts.isLoading;
+      if (isLoading) {
+        toast.info('You delete contact');
+        return false;
+      }
+    },
   }
-  // {
-  //   condition: (_, { getState }) => {
-  //     console.log(getState());
-  //     const isLoading = getState().contacts.isLoading;
-  //     if (isLoading) {
-  //       alert('You have active loading');
-  //       return false;
-  //     }
-  //   },
-  // }
 );

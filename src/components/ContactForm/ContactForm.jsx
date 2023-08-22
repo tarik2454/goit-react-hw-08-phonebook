@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { StyledForm, StyledInput, StyledButton } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 
-// import { nanoid } from '@reduxjs/toolkit';
 import { selectContacts } from 'redux/selectors';
 import { addContact } from 'redux/Contact/operations';
+import { toast } from 'react-toastify';
 
 export const ContactForm = () => {
   const contacts = useSelector(selectContacts);
@@ -28,7 +28,7 @@ export const ContactForm = () => {
     );
 
     if (isContactExist) {
-      alert(`${newContact.name} is already in contacts`);
+      toast.error(`${newContact.name} is already in contacts`);
     } else {
       dispatch(addContact(newContact));
     }

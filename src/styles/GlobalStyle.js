@@ -72,8 +72,7 @@ export const GlobalStyledContainer = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
-  /* max-width: 480px; */
-  max-width: 511px;
+  max-width: 480px;
 
   @media screen and (min-width: 768px) {
     width: 768px;

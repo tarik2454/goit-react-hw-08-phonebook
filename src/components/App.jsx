@@ -1,49 +1,22 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { styled } from 'styled-components';
-import { ContactForm } from './ContactForm/ContactForm';
-import { ContactList } from './ContactList/ContactList';
-import { Filter } from './Filter/Filter';
-import {
-  GlobalStyledMain,
-  GlobalStyledSection,
-  GlobalStyledContainer,
-  GlobalStyledTitle,
-  StyledSmollTitle,
-} from 'styles/GlobalStyle';
-import { selectIsLoading } from 'redux/selectors';
-import { fetchContacts } from 'redux/Contact/operations';
-import { Loader } from './Loader/Loader';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { Home } from 'pages/Home';
+import { Register } from 'pages/Register';
+import { Login } from 'pages/Login';
+import { NotFound } from 'pages/NotFound';
+import { Layout } from './Layout';
 
 export const App = () => {
-  const isLoading = useSelector(selectIsLoading);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
   return (
-    <GlobalStyledMain>
-      <GlobalStyledSection>
-        <GlobalStyledContainer>
-          <StyledWrapper>
-            <GlobalStyledTitle>PhoneBook</GlobalStyledTitle>
-            <ContactForm />
-            <Filter />
-            <StyledSmollTitle>Contacts</StyledSmollTitle>
-
-            {isLoading ? <Loader /> : <ContactList />}
-          </StyledWrapper>
-        </GlobalStyledContainer>
-      </GlobalStyledSection>
-    </GlobalStyledMain>
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 };
-
-const StyledWrapper = styled.div`
-  padding: 20px;
-  background-color: ${props => props.theme.colors.$secondaryBgColor};
-  border-radius: ${props => props.theme.$borderRadius};
-  box-shadow: ${props => props.theme.$boxShadow};
-`;
