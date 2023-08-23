@@ -2,7 +2,6 @@ import {
   StyledContactList,
   StyledItem,
   StyledButton,
-  StyledWrapper,
 } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectVisibleContacts } from 'redux/selectors';
@@ -14,21 +13,20 @@ export const ContactList = () => {
 
   return (
     <StyledContactList>
-      {visibleContacts.map(({ id, name, phone }, index) => (
+      {visibleContacts.map(({ id, name, number }, index) => (
         <StyledItem key={id}>
           <span>
             {index + 1}. {name}:
           </span>
-          <StyledWrapper>
-            <span>{phone}</span>
-            <StyledButton
-              onClick={() => {
-                dispatch(deleteContact(id));
-              }}
-            >
-              Delete
-            </StyledButton>
-          </StyledWrapper>
+
+          <span>{number}</span>
+          <StyledButton
+            onClick={() => {
+              dispatch(deleteContact(id));
+            }}
+          >
+            Delete
+          </StyledButton>
         </StyledItem>
       ))}
     </StyledContactList>

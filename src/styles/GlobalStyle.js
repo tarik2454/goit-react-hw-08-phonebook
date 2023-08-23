@@ -1,7 +1,8 @@
 import { createGlobalStyle, styled } from 'styled-components';
 import '@csstools/normalize.css';
+import { motion } from 'framer-motion';
 // import 'normalize.css';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export const GlobalStyle = createGlobalStyle`
   body {
@@ -12,18 +13,21 @@ export const GlobalStyle = createGlobalStyle`
   -moz-osx-font-smoothing: grayscale;
   color: ${({ theme }) => theme.colors.$primiryTextColor};
   background-color: ${({ theme }) => theme.colors.$primiryBgColor};
-  line-height: 1;
+  font-size: 17px;
+  line-height: 1.3;
   letter-spacing: 0.02em;
+  background: linear-gradient(180deg,#6a9bd8,#ffb6cd);
   }
 `;
 
-export const GlobalStyledTitle = styled.h1`
-  margin-bottom: 20px;
+export const GlobalStyledH1 = styled(motion.h1)`
+  margin-bottom: 25px;
+  font-size: ${props => props.$fontSize || '25px'};
   color: ${props => props.theme.colors.$secondaryTextColor};
   text-align: center;
 `;
 
-export const StyledSmollTitle = styled.h2`
+export const GlobalStyledH2 = styled.h2`
   margin-bottom: 10px;
   color: ${props => props.theme.colors.$primiryTextColor};
   font-size: 20px;
@@ -31,7 +35,7 @@ export const StyledSmollTitle = styled.h2`
 `;
 
 export const GlobalStyledLink = styled(Link)`
-  font-size: 12px;
+  font-size: 20px;
   color: ${props => props.theme.colors.$primiryTextColor};
   text-decoration: none;
 
@@ -40,14 +44,42 @@ export const GlobalStyledLink = styled(Link)`
   }
 `;
 
-export const GlobalStyledButton = styled.button`
-  max-height: 37px;
-  padding: ${props => props.$padding || '10px 15px'};
-  margin: ${props => props.$margin || '0'};
+export const GlobalStyledNavLink = styled(NavLink)`
+  display: inline-block;
+  padding: ${props => props.$padding || '0 0'};
+  font-size: ${props => props.$fontSize || '20px'};
+  color: ${props => props.$color || props.theme.colors.$primiryTextColor};
+  transition: ${theme => theme.$transition};
 
-  border-radius: ${props => props.theme.$borderRadius};
-  color: black;
+  &:after {
+    display: block;
+    content: '';
+    width: 0;
+    height: 3px;
+    background-color: ${props => props.theme.colors.$accentColor};
+    transform-origin: left;
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &.active,
+  &:hover {
+    &:after {
+      width: 100%;
+    }
+  }
+
+  &:hover:not(.active) {
+  }
+`;
+
+export const GlobalStyledButton = styled(motion.button)`
+  display: block;
+  padding: ${props => props.$padding || '5px 15px'};
+  font-size: 20px;
+  color: ${({ theme }) => theme.colors.$black};
   background-color: lightblue;
+  border-radius: ${props => props.theme.$borderRadius};
+  transition: ${props => props.theme.$transition};
 
   &:hover,
   &:focus {
@@ -56,25 +88,26 @@ export const GlobalStyledButton = styled.button`
   }
 `;
 
-export const GlobalStyledMain = styled.main`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+export const GlobalStyledMain = styled.main``;
 
-export const GlobalStyledSection = styled.section`
+export const GlobalStyledSection = styled(motion.section)`
   width: 100%;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding: 30px 40px;
+  background-color: ${props => props.theme.colors.$secondaryBgColor};
+  border-radius: ${props => props.theme.$borderRadius};
+  opacity: 0.7;
 `;
 
 export const GlobalStyledContainer = styled.div`
-  width: 100%;
+  /* width: 100%;
   margin: 0 auto;
   padding: 0 20px;
-  max-width: 480px;
+  max-width: 480px; */
+  margin: 0px auto;
+  padding: 0px 15px;
+  max-width: 768px;
 
-  @media screen and (min-width: 768px) {
+  /* @media screen and (min-width: 768px) {
     width: 768px;
     padding: 0 32px;
   }
@@ -82,5 +115,5 @@ export const GlobalStyledContainer = styled.div`
   @media screen and (min-width: 1440px) {
     width: 1440px;
     padding: 0 24px;
-  }
+  } */
 `;

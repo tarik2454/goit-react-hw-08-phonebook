@@ -70,8 +70,13 @@ section {
   display: block;
 }
 
-ul[class],
+/* ul[class],
 ol[class] {
+  padding-left: 0;
+} */
+
+ul,
+ol {
   padding-left: 0;
 }
 
@@ -87,17 +92,27 @@ html:focus-within {
 body {
   min-height: 100vh;
   // text-rendering: optimizeSpeed;
-  line-height: 1;
+  /* line-height: 1; */
 }
 
-ul[class],
+/* ul[class],
 ol[class] {
+  list-style: none;
+} */
+
+ul,
+ol {
   list-style: none;
 }
 
-a[class] {
+/* a[class] {
+  text-decoration: none;
+} */
+
+a {
   text-decoration: none;
 }
+
 
 a:not([class]) {
   text-decoration-skip-ink: auto;

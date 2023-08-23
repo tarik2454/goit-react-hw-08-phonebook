@@ -1,17 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { toast } from 'react-toastify';
-
-export const baseURL = axios.create({
-  baseURL: 'https://64df632671c3335b2582897e.mockapi.io',
-});
+import { baseURL } from 'redux/Auth/operations';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
       const { data } = await baseURL.get('/contacts');
-
       return data;
     } catch (error) {
       console.error(error);
@@ -20,7 +15,6 @@ export const fetchContacts = createAsyncThunk(
   },
   {
     condition: (_, { getState }) => {
-      // console.log(getState());
       const isLoading = getState().contacts.isLoading;
       if (isLoading) {
         toast.info('You have active loading');
@@ -53,13 +47,13 @@ export const deleteContact = createAsyncThunk(
     }
   },
   {
-    condition: (_, { getState }) => {
-      // console.log(getState());
-      const isLoading = getState().contacts.isLoading;
-      if (isLoading) {
-        toast.info('You delete contact');
-        return false;
-      }
-    },
+    // condition: (_, { getState }) => {
+    //   // console.log(getState());
+    //   const isLoading = getState().contacts.isLoading;
+    //   if (isLoading) {
+    //     toast.info('You delete contact');
+    //     return false;
+    //   }
+    // },
   }
 );

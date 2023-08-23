@@ -14,12 +14,6 @@ export const StyledItem = styled.li`
   width: 100%;
 `;
 
-export const StyledWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
-
 export const StyledButton = styled.button`
   display: block;
   min-width: 70px;

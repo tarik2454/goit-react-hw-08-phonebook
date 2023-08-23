@@ -13,8 +13,12 @@ export const Filter = () => {
 
   return (
     <StyledLabel>
-      Find contacts by name:
-      <StyledInput type="text" value={filter} onChange={handleFilterChange} />
+      <StyledInput
+        type="text"
+        value={filter}
+        onChange={handleFilterChange}
+        placeholder="Find contacts by name..."
+      />
     </StyledLabel>
   );
 };

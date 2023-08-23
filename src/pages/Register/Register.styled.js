@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { styled } from 'styled-components';
 
 export const StyledForm = styled.form`
@@ -6,7 +7,6 @@ export const StyledForm = styled.form`
   justify-content: center;
   align-items: center;
   gap: 15px;
-  margin-bottom: 20px;
   transition: ${({ theme }) => theme.$transition};
   text-align: center;
 `;
@@ -17,7 +17,7 @@ export const FormItem = styled.div`
   justify-content: center;
   align-items: center;
 
-  &:nth-child(2) {
+  &:nth-child(3) {
     margin-bottom: 5px;
   }
 `;
@@ -26,7 +26,7 @@ export const StyledFormLabel = styled.label`
   margin-bottom: 5px;
 `;
 
-export const StyledInput = styled.input`
+export const StyledInput = styled(motion.input)`
   width: 100%;
   min-width: 270px;
   padding: 7px 15px;
@@ -41,13 +41,4 @@ export const StyledInput = styled.input`
   &:focus {
     border: 1px solid #437aa5;
   }
-`;
-
-export const StyledButton = styled.button`
-  display: block;
-  margin: 0 auto;
-  padding: 10px;
-  border-radius: 4px;
-  color: ${props => props.theme.colors.$white};
-  background-color: ${props => props.theme.colors.$accentColor};
 `;

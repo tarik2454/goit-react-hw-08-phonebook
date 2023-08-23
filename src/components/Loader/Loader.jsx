@@ -1,23 +1,24 @@
 import React from 'react';
-import { LineWave } from 'react-loader-spinner';
+import { Blocks } from 'react-loader-spinner';
+import { styled } from 'styled-components';
 
 export const Loader = () => {
   return (
-    <LineWave
-      height="100"
-      width="100"
-      color="#437aa5"
-      ariaLabel="line-wave"
-      viewBox="80 80"
-      wrapperStyle={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-      wrapperClass=""
-      visible={true}
-      firstLineColor=""
-      middleLineColor=""
-      lastLineColor=""
-    />
+    <StyledBlock>
+      <Blocks
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{}}
+        wrapperClass="blocks-wrapper"
+      />
+    </StyledBlock>
   );
 };
+export const StyledBlock = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+`;

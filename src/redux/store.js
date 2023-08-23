@@ -21,8 +21,7 @@ const persistConfig = {
 };
 
 export const persistConfigAuth = {
-  key: 'user',
-  version: 1,
+  key: 'auth',
   storage,
   whitelist: ['token'],
 };
