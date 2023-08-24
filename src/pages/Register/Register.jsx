@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
-import { registerThunk } from '../redux/Auth/operations';
+import { registerThunk } from '../../redux/Auth/operations';
 import {
   GlobalStyledButton,
   GlobalStyledContainer,

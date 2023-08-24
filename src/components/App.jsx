@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Home } from 'pages/Home';
-import { Register } from 'pages/Register';
+import { Register } from 'pages/Register/Register';
 import { Login } from 'pages/Login/Login';
-import { NotFound } from 'pages/NotFound';
 import { Layout } from './Layout';
 import { Contacts } from 'pages/Contacts';
 import { PrivateRoute } from 'HOC/PrivateRoute';
@@ -11,10 +10,11 @@ import { PublicRoute } from 'HOC/PublicRoute';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshThunk } from 'redux/Auth/operations';
 import { Loader } from './Loader/Loader';
-import { selectIsRefreshing } from 'redux/Auth/selectors';
+import { selectIsLoggedIn, selectIsRefreshing } from 'redux/Auth/selectors';
 
 export const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -47,13 +47,26 @@ export const App = () => {
           <Route
             path="contacts"
             element={
-              <PrivateRoute>
-                <Contacts />
-              </PrivateRoute>
+              isLoggedIn ? (
+                <PrivateRoute>
+                  <Contacts />
+                </PrivateRoute>
+              ) : (
+                <Navigate to="/login" replace />
+              )
             }
           />
         </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="*"
+          element={
+            isLoggedIn ? (
+              <Navigate to="/contacts" replace />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
       </Routes>
     </div>
   );
